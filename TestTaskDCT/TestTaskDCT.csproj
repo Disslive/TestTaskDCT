@@ -73,6 +73,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\Asset.cs" />
+    <Compile Include="Models\Market.cs" />
     <Compile Include="Models\Parameter.cs" />
     <Compile Include="Services\Requests.cs" />
     <Compile Include="ViewModels\Base\ViewModelBase.cs" />
