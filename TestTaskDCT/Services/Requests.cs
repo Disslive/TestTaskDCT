@@ -6,7 +6,7 @@ using TestTaskDCT.Models;
 
 namespace TestTaskDCT.Services
 {
-    class Requests
+    public class Requests
     {
 
         // assets: "assets"
@@ -14,7 +14,7 @@ namespace TestTaskDCT.Services
         // rates: "rates/{assetId}"
         // graphPoints: "assets/{assetId}/history?interval={interval}"
 
-        List<GraphPoint> GetPoints(string assetId, string interval, List<RequestParameter> parameters = null)
+        public List<GraphPoint> GetPoints(string assetId, string interval, List<RequestParameter> parameters = null)
         {
             string URL = $"assets/{assetId}/history?interval={interval}";
             string responseData;
@@ -30,23 +30,16 @@ namespace TestTaskDCT.Services
             return points;
         }
 
-        List<Rate> GetRates(string assetId, List<RequestParameter> parameters = null)
+        public Rate GetRates(string assetId)
         {
             string URL = $"rates/{assetId}";
             string responseData;
-            if (parameters == null)
-            {
-                responseData = Get(URL);
-            }
-            else
-            {
-                responseData = Get(URL, parameters);
-            }
-            List<Rate> rates = JsonConvert.DeserializeObject<List<Rate>>(responseData);
-            return rates;
+            responseData = Get(URL);   
+            Rate rate = JsonConvert.DeserializeObject<Rate>(responseData);
+            return rate;
         }
 
-        List<Market> GetMarketsData(string assetId, List<RequestParameter> parameters = null)
+        public List<Market> GetMarketsData(string assetId, List<RequestParameter> parameters = null)
         {
             string URL = $"assets/{assetId}/markets";
             string responseData;
@@ -62,7 +55,7 @@ namespace TestTaskDCT.Services
             return markets;
         }
 
-        List<Asset> GetAssetsData(List<RequestParameter> parameters = null)
+        public List<Asset> GetAssetsData(List<RequestParameter> parameters = null)
         {
             string URL = "assets";
             string responseData;

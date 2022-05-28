@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestTaskDCT.Models
 {
-    class GraphPoint
+    public class GraphPoint
     {
         public double PriceUSD { get; set; }
         public int Time { get; set; }

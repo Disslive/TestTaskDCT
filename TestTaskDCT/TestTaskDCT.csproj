@@ -78,6 +78,7 @@
     <Compile Include="Models\Market.cs" />
     <Compile Include="Models\RequestParameter.cs" />
     <Compile Include="Models\Rate.cs" />
+    <Compile Include="Services\Calculations.cs" />
     <Compile Include="Services\Requests.cs" />
     <Compile Include="ViewModels\Base\ViewModelBase.cs" />
     <Compile Include="Views\Windows\MainWindow.xaml.cs">

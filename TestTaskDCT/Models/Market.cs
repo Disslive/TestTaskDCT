@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestTaskDCT.Models
 {
-    class Market
+    public class Market
     {
         public string ExchangeId { get; set; }
         public string BaseId { get; set; }

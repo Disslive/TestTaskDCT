@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestTaskDCT.Models
 {
-    class Rate
+    public class Rate
     {
         public string Id { get; set; }
         public string Symbol { get; set; }
