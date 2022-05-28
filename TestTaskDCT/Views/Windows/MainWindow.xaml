@@ -25,7 +25,20 @@
             </MenuItem>
         </Menu>
         <TabControl>
-            <TabItem Header="Main"></TabItem>
+            <TabItem Header="Main">
+                <DataGrid ItemsSource="{Binding Assets }"
+                          AutoGenerateColumns="False"
+                          IsReadOnly="True"
+                          >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Rank" Binding="{Binding Rank}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Symbol" Width="*" Binding="{Binding Symbol}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Price" Width="*" Binding="{Binding PriceUsd}"></DataGridTextColumn>
+                        
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
             <TabItem Header="Currency Details"></TabItem>
             <TabItem Header="Graphs"></TabItem>
             <TabItem Header="Converter"></TabItem>
