@@ -1,6 +1,6 @@
 ﻿namespace TestTaskDCT.Models
 {
-    class Parameter
+    class RequestParameter
     {
         public string Name { get; set; }
         public object Value { get; set; }

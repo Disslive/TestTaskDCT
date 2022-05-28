@@ -74,8 +74,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\Asset.cs" />
+    <Compile Include="Models\GraphPoint.cs" />
     <Compile Include="Models\Market.cs" />
-    <Compile Include="Models\Parameter.cs" />
+    <Compile Include="Models\RequestParameter.cs" />
+    <Compile Include="Models\Rate.cs" />
     <Compile Include="Services\Requests.cs" />
     <Compile Include="ViewModels\Base\ViewModelBase.cs" />
     <Compile Include="Views\Windows\MainWindow.xaml.cs">

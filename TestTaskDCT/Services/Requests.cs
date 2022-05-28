@@ -9,7 +9,44 @@ namespace TestTaskDCT.Services
     class Requests
     {
 
-        List<Market> GetMarketsData(string assetId, List<Models.Parameter> parameters = null)
+        // assets: "assets"
+        // markets: "assets/{assetId}/markets"
+        // rates: "rates/{assetId}"
+        // graphPoints: "assets/{assetId}/history?interval={interval}"
+
+        List<GraphPoint> GetPoints(string assetId, string interval, List<RequestParameter> parameters = null)
+        {
+            string URL = $"assets/{assetId}/history?interval={interval}";
+            string responseData;
+            if (parameters == null)
+            {
+                responseData = Get(URL);
+            }
+            else
+            {
+                responseData = Get(URL, parameters);
+            }
+            List<GraphPoint> points = JsonConvert.DeserializeObject<List<GraphPoint>>(responseData);
+            return points;
+        }
+
+        List<Rate> GetRates(string assetId, List<RequestParameter> parameters = null)
+        {
+            string URL = $"rates/{assetId}";
+            string responseData;
+            if (parameters == null)
+            {
+                responseData = Get(URL);
+            }
+            else
+            {
+                responseData = Get(URL, parameters);
+            }
+            List<Rate> rates = JsonConvert.DeserializeObject<List<Rate>>(responseData);
+            return rates;
+        }
+
+        List<Market> GetMarketsData(string assetId, List<RequestParameter> parameters = null)
         {
             string URL = $"assets/{assetId}/markets";
             string responseData;
@@ -25,7 +62,7 @@ namespace TestTaskDCT.Services
             return markets;
         }
 
-        List<Asset> GetAssetsData(List<Models.Parameter> parameters = null)
+        List<Asset> GetAssetsData(List<RequestParameter> parameters = null)
         {
             string URL = "assets";
             string responseData;
@@ -42,7 +79,7 @@ namespace TestTaskDCT.Services
         }
 
 
-        protected string Get(string URL, List<Models.Parameter> parameters = null)
+        protected string Get(string URL, List<RequestParameter> parameters = null)
         {
             string BaseURL = "https://api.coincap.io/v2/";
             URL = BaseURL + URL;
