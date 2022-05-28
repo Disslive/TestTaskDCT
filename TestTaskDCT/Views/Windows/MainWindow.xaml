@@ -3,10 +3,32 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm ="clr-namespace:TestTaskDCT.ViewModels" 
         xmlns:local="clr-namespace:TestTaskDCT"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="{Binding Title}" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Exit"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Theme">
+                <MenuItem Header="{Binding Theme}"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Language">
+                <MenuItem Header="English"></MenuItem>
+                <MenuItem Header="Українська"></MenuItem>
+                <MenuItem Header="Русский"></MenuItem>
+            </MenuItem>
+        </Menu>
+        <TabControl>
+            <TabItem Header="Main"></TabItem>
+            <TabItem Header="Currency Details"></TabItem>
+            <TabItem Header="Graphs"></TabItem>
+            <TabItem Header="Converter"></TabItem>
+        </TabControl>
+    </DockPanel>
 </Window>
