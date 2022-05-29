@@ -1,0 +1,28 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system ="clr-namespace:System;assembly=mscorlib">
+    <system:String x:Key="file">File</system:String>
+    <system:String x:Key="theme">Theme</system:String>
+    <system:String x:Key="lang">Language</system:String>
+    <system:String x:Key="exit">Exit</system:String>
+    <system:String x:Key="dark">Switch to dark</system:String>
+    <system:String x:Key="light">Switch to light</system:String>
+    <system:String x:Key="main">Main</system:String>
+    <system:String x:Key="details">Currency Details</system:String>
+    <system:String x:Key="charts">Charts</system:String>
+    <system:String x:Key="converter">Converter</system:String>
+    <system:String x:Key="rank">Rank</system:String>
+    <system:String x:Key="name">Name</system:String>
+    <system:String x:Key="symbol">Symbol</system:String>
+    <system:String x:Key="price">Price (USD)</system:String>
+    <system:String x:Key="show">Show</system:String>
+    <system:String x:Key="marketCap">Market Cap (USD)</system:String>
+    <system:String x:Key="supply">Supply</system:String>
+    <system:String x:Key="change">Change (Percent)</system:String>
+    <system:String x:Key="market">Market Name</system:String>
+    <system:String x:Key="volume">Volume Percent</system:String>
+    <system:String x:Key="plot">Plot</system:String>
+    <system:String x:Key="convert">Convert</system:String>
+    <system:String x:Key="sell">You Sell</system:String>
+    <system:String x:Key="get">You Get</system:String>
+</ResourceDictionary>

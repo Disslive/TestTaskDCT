@@ -1,0 +1,29 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system ="clr-namespace:System;assembly=mscorlib">
+    <system:String x:Key="file">Файл</system:String>
+    <system:String x:Key="theme">Тема</system:String>
+    <system:String x:Key="lang">Мова</system:String>
+    <system:String x:Key="exit">Вихід</system:String>
+    <system:String x:Key="dark">Переключити на темну</system:String>
+    <system:String x:Key="light">Переключити на світлу</system:String>
+    <system:String x:Key="main">Головна</system:String>
+    <system:String x:Key="details">Деталі Валюти</system:String>
+    <system:String x:Key="charts">Графіки</system:String>
+    <system:String x:Key="converter">Конвертер</system:String>
+    <system:String x:Key="rank">Популярність</system:String>
+    <system:String x:Key="name">Назва</system:String>
+    <system:String x:Key="symbol">Символ</system:String>
+    <system:String x:Key="price">Ціна (USD)</system:String>
+    <system:String x:Key="show">Показати</system:String>
+    <system:String x:Key="marketCap">Ринкова капіталізація</system:String>
+    <system:String x:Key="supply">Доступно</system:String>
+    <system:String x:Key="change">Зміна (Відсоток)</system:String>
+    <system:String x:Key="market">Назва магазину</system:String>
+    <system:String x:Key="volume">Обсяг валюти (відсоток)</system:String>
+    <system:String x:Key="plot">Відобразити</system:String>
+    <system:String x:Key="convert">Конвертувати</system:String>
+    <system:String x:Key="sell">Ви продаєте</system:String>
+    <system:String x:Key="get">Ви отримуєте</system:String>
+    
+</ResourceDictionary>
