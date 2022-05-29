@@ -13,7 +13,7 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
-                <MenuItem Header="Exit"></MenuItem>
+                <MenuItem Header="Exit" Command="{Binding  CloseApplicationCommand}"></MenuItem>
             </MenuItem>
             <MenuItem Header="Theme">
                 <MenuItem Header="{Binding Theme}"></MenuItem>
@@ -26,7 +26,7 @@
         </Menu>
         <TabControl>
             <TabItem Header="Main">
-                <DataGrid ItemsSource="{Binding Assets }"
+                <DataGrid ItemsSource="{Binding BestAssets}"
                           AutoGenerateColumns="False"
                           IsReadOnly="True"
                           >
@@ -35,13 +35,47 @@
                         <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Symbol" Width="*" Binding="{Binding Symbol}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Price" Width="*" Binding="{Binding PriceUsd}"></DataGridTextColumn>
-                        
+
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
-            <TabItem Header="Currency Details"></TabItem>
-            <TabItem Header="Graphs"></TabItem>
-            <TabItem Header="Converter"></TabItem>
+            <TabItem Header="Currency Details">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="22*"/>
+                        <ColumnDefinition Width="191*"/>
+                        <ColumnDefinition Width="573*"/>
+                    </Grid.ColumnDefinitions>
+                    <ComboBox VerticalAlignment="Center" Width="200" Height="30" Margin="10,10,3,333" Grid.ColumnSpan="2" ItemsSource="{Binding Path=Currencies}" DisplayMemberPath="Name" />
+                    <DataGrid ItemsSource="{Binding BestAssets}"
+                          AutoGenerateColumns="False"
+                          IsReadOnly="True" Grid.ColumnSpan="3" Margin="0,45,0,0"
+                          >
+
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Graphs">
+                <Grid>
+                    <ComboBox VerticalAlignment="Center" Width="200" Height="30" Margin="10,10,576,333" ItemsSource="{Binding Path=Currencies}" DisplayMemberPath="Name"/>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Converter">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="161*"/>
+                        <ColumnDefinition Width="625*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Height="30" Width="200" Margin="256,58,169,285" Grid.Column="1"></TextBlock>
+                    <TextBlock Height="30" Width="200" Margin="100,152,486,191" Text="You Sell" TextAlignment="Center" Grid.ColumnSpan="2"></TextBlock>
+                    <TextBox Width="200" Height="30" Margin="100,58,486,285" Grid.ColumnSpan="2"></TextBox>
+                    <ComboBox VerticalAlignment="Center" Width="200" Height="30" Margin="100,112,486,231" Grid.ColumnSpan="2" ItemsSource="{Binding Path=Currencies}" DisplayMemberPath="Name"></ComboBox>
+                    <ComboBox VerticalAlignment="Center" Width="200" Height="30" Margin="256,112,169,231" Grid.Column="1" ItemsSource="{Binding Path=Currencies}" DisplayMemberPath="Name"></ComboBox>
+                    <TextBlock Height="30" Width="200" Margin="256,152,169,191" Text="You Get" TextAlignment="Center" Grid.Column="1"/>
+                    <Button Width="200" Height="30" Margin="108,187,317,156" Content="Convert" Grid.Column="1"></Button>
+                </Grid>
+            </TabItem>
         </TabControl>
     </DockPanel>
 </Window>

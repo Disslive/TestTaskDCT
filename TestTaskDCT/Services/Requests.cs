@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using RestSharp;
 using System.Collections.Generic;
 using TestTaskDCT.Models;
+using System.Collections.ObjectModel;
 
 namespace TestTaskDCT.Services
 {
@@ -14,7 +15,7 @@ namespace TestTaskDCT.Services
         // rates: "rates/{assetId}"
         // graphPoints: "assets/{assetId}/history?interval={interval}"
 
-        public List<GraphPoint> GetPoints(string assetId, string interval, List<RequestParameter> parameters = null)
+        public ObservableCollection<GraphPoint> GetPoints(string assetId, string interval, List<RequestParameter> parameters = null)
         {
             string URL = $"assets/{assetId}/history?interval={interval}";
             string responseData;
@@ -26,7 +27,7 @@ namespace TestTaskDCT.Services
             {
                 responseData = Get(URL, parameters);
             }
-            List<GraphPoint> points = JsonConvert.DeserializeObject<List<GraphPoint>>(responseData);
+            ObservableCollection<GraphPoint> points = JsonConvert.DeserializeObject<ObservableCollection<GraphPoint>>(responseData);
             return points;
         }
 
@@ -39,7 +40,7 @@ namespace TestTaskDCT.Services
             return rate;
         }
 
-        public List<Market> GetMarketsData(string assetId, List<RequestParameter> parameters = null)
+        public ObservableCollection<Market> GetMarketsData(string assetId, List<RequestParameter> parameters = null)
         {
             string URL = $"assets/{assetId}/markets";
             string responseData;
@@ -51,11 +52,11 @@ namespace TestTaskDCT.Services
             {
                 responseData = Get(URL, parameters);
             }
-            List<Market> markets = JsonConvert.DeserializeObject<List<Market>>(responseData);
+            ObservableCollection<Market> markets = JsonConvert.DeserializeObject<ObservableCollection<Market>>(responseData);
             return markets;
         }
 
-        public List<Asset> GetAssetsData(List<RequestParameter> parameters = null)
+        public ObservableCollection<Asset> GetAssetsData(List<RequestParameter> parameters = null)
         {
             string URL = "assets";
             string responseData;
@@ -67,7 +68,7 @@ namespace TestTaskDCT.Services
             {
                 responseData = Get(URL, parameters);
             }
-            List<Asset> assets = JsonConvert.DeserializeObject<List<Asset>>(responseData);
+            ObservableCollection<Asset> assets = JsonConvert.DeserializeObject<ObservableCollection<Asset>>(responseData);
             return assets;
         }
 
