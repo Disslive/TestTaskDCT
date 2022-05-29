@@ -7,10 +7,14 @@ namespace TestTaskDCT.Services
         public double ConvertCurrency(string startCurrencyId, string endCurrencyId, double startCurrencyAmount)
         {
             Requests requests = new Requests();
-            Rate startCurrencyRate = requests.GetRates(startCurrencyId);
-            Rate endCurrencyRate = requests.GetRates(endCurrencyId);
-            double USD = startCurrencyAmount * startCurrencyRate.RateUSD;
-            return USD / endCurrencyRate.RateUSD;
+            Rate startCurrencyRate = requests.GetRate(startCurrencyId);
+            Rate endCurrencyRate = requests.GetRate(endCurrencyId);
+            if(startCurrencyRate!=null && endCurrencyRate != null)
+            {
+                double USD = startCurrencyAmount * startCurrencyRate.RateUSD;
+                return USD / endCurrencyRate.RateUSD;
+            }
+            return 0;
         }
     }
 }

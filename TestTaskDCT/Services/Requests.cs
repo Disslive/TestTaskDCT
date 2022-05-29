@@ -4,6 +4,7 @@ using RestSharp;
 using System.Collections.Generic;
 using TestTaskDCT.Models;
 using System.Collections.ObjectModel;
+using System;
 
 namespace TestTaskDCT.Services
 {
@@ -27,17 +28,25 @@ namespace TestTaskDCT.Services
             {
                 responseData = Get(URL, parameters);
             }
-            ObservableCollection<GraphPoint> points = JsonConvert.DeserializeObject<ObservableCollection<GraphPoint>>(responseData);
-            return points;
+            if (responseData != null)
+            {
+                ObservableCollection<GraphPoint> points = JsonConvert.DeserializeObject<ObservableCollection<GraphPoint>>(responseData);
+                return points;
+            }
+            return null;
         }
 
-        public Rate GetRates(string assetId)
+        public Rate GetRate(string assetId)
         {
             string URL = $"rates/{assetId}";
             string responseData;
-            responseData = Get(URL);   
-            Rate rate = JsonConvert.DeserializeObject<Rate>(responseData);
-            return rate;
+            responseData = Get(URL);
+            if (responseData != null)
+            {
+                Rate rate = JsonConvert.DeserializeObject<Rate>(responseData);
+                return rate;
+            }
+            return null;
         }
 
         public ObservableCollection<Market> GetMarketsData(string assetId, List<RequestParameter> parameters = null)
@@ -52,8 +61,12 @@ namespace TestTaskDCT.Services
             {
                 responseData = Get(URL, parameters);
             }
-            ObservableCollection<Market> markets = JsonConvert.DeserializeObject<ObservableCollection<Market>>(responseData);
-            return markets;
+            if (responseData != null)
+            {
+                ObservableCollection<Market> markets = JsonConvert.DeserializeObject<ObservableCollection<Market>>(responseData);
+                return markets;
+            }
+            return null;
         }
 
         public ObservableCollection<Asset> GetAssetsData(List<RequestParameter> parameters = null)
@@ -68,8 +81,12 @@ namespace TestTaskDCT.Services
             {
                 responseData = Get(URL, parameters);
             }
-            ObservableCollection<Asset> assets = JsonConvert.DeserializeObject<ObservableCollection<Asset>>(responseData);
-            return assets;
+            if (responseData != null)
+            {
+                 ObservableCollection<Asset> assets = JsonConvert.DeserializeObject<ObservableCollection<Asset>>(responseData);
+                 return assets;
+            }
+            return null;
         }
 
 
@@ -89,7 +106,13 @@ namespace TestTaskDCT.Services
             }
             IRestResponse response = client.Execute(request);
             JObject obj = JObject.Parse(response.Content);
-            return obj["data"].ToString();
+            try
+            {
+                string data = obj["data"].ToString();
+                return data;
+            } catch(NullReferenceException e) {  }
+           
+            return null;
         }
     }
 }

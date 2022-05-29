@@ -67,13 +67,13 @@
                         <ColumnDefinition Width="161*"/>
                         <ColumnDefinition Width="625*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Height="30" Width="200" Margin="256,58,169,285" Grid.Column="1"></TextBlock>
+                    <TextBlock Height="30" Width="200" Margin="256,58,169,285" Grid.Column="1" Text="{Binding ConvertedCurrency}"></TextBlock>
                     <TextBlock Height="30" Width="200" Margin="100,152,486,191" Text="You Sell" TextAlignment="Center" Grid.ColumnSpan="2"></TextBlock>
-                    <TextBox Width="200" Height="30" Margin="100,58,486,285" Grid.ColumnSpan="2"></TextBox>
-                    <ComboBox VerticalAlignment="Center" Width="200" Height="30" Margin="100,112,486,231" Grid.ColumnSpan="2" ItemsSource="{Binding Path=Currencies}" DisplayMemberPath="Name"></ComboBox>
-                    <ComboBox VerticalAlignment="Center" Width="200" Height="30" Margin="256,112,169,231" Grid.Column="1" ItemsSource="{Binding Path=Currencies}" DisplayMemberPath="Name"></ComboBox>
+                    <TextBox Width="200" Height="30" Margin="100,58,486,285" Grid.ColumnSpan="2" PreviewTextInput="NumberValidationTextBox" Text="{Binding ConvertAmount}"></TextBox>
+                    <ComboBox VerticalAlignment="Center" Width="200" Height="30" Margin="100,112,486,231" Grid.ColumnSpan="2" ItemsSource="{Binding Path=Currencies}" DisplayMemberPath="Name" SelectedItem="{Binding ToConvert}"></ComboBox>
+                    <ComboBox VerticalAlignment="Center" Width="200" Height="30" Margin="256,112,169,231" Grid.Column="1" ItemsSource="{Binding Path=Currencies}" DisplayMemberPath="Name" SelectedItem="{Binding ConvertInto}"></ComboBox>
                     <TextBlock Height="30" Width="200" Margin="256,152,169,191" Text="You Get" TextAlignment="Center" Grid.Column="1"/>
-                    <Button Width="200" Height="30" Margin="108,187,317,156" Content="Convert" Grid.Column="1"></Button>
+                    <Button Width="200" Height="30" Margin="108,187,317,156" Content="Convert" Grid.Column="1" Command="{Binding ConvertCurrencyCommand}"></Button>
                 </Grid>
             </TabItem>
         </TabControl>
