@@ -17,19 +17,6 @@ namespace TestTaskDCT.ViewModels
         Requests requests = new Requests();
         Calculations calculations = new Calculations();
 
-        private string _Title = "Main window - Test task";
-        public string Title
-        {
-            get => _Title;
-            set => Set(ref _Title, value);
-        }
-
-        private string _Theme = "Switch to dark";
-        public string Theme
-        {
-            get => _Theme;
-            set => Set(ref _Theme, value);
-        }
 
         private string _ConvertedCurrency = null;
         public string ConvertedCurrency
@@ -106,7 +93,7 @@ namespace TestTaskDCT.ViewModels
 
         private bool CanConvertCurrencyCommandExecute(object p)
         {
-            if (_ToConvert != null && _ConvertInto!=null && _ConvertAmount != 0) return true;
+            if (_ToConvert != null && _ConvertInto != null && _ConvertAmount != 0) return true;
             return false;
         }
 
@@ -117,7 +104,7 @@ namespace TestTaskDCT.ViewModels
             {
                 ConvertedCurrency = result.ToString();
             }
-           else
+            else
             {
                 ConvertedCurrency = "Converting is impossible";
             }
@@ -138,17 +125,17 @@ namespace TestTaskDCT.ViewModels
             }
             return false;
         }
-    
+
         private void OnDrawChartCommandExecuted(object p)
         {
-            ObservableCollection<GraphPoint> unixPoints  = requests.GetPoints(PlotCurrency.Id, "d1");
+            ObservableCollection<GraphPoint> unixPoints = requests.GetPoints(PlotCurrency.Id, "d1");
             Points = new ObservableCollection<DatePoints>();
-            foreach(var up in unixPoints)
+            foreach (var up in unixPoints)
             {
-                DateTime start = new DateTime(1970, 1, 1,0,0,0,DateTimeKind.Utc);
+                DateTime start = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
                 DateTime date = start.AddMilliseconds(up.Time).ToLocalTime();
-                
-                Points.Add( new DatePoints { PriceUSD = up.PriceUSD, Date = date});
+
+                Points.Add(new DatePoints { PriceUSD = up.PriceUSD, Date = date });
             }
             OnPropertyChanged("Points");
         }
@@ -179,6 +166,8 @@ namespace TestTaskDCT.ViewModels
 
         }
         #endregion
+
+
         public MainWindowViewModel()
         {
             ShowInfoCommand = new LambdaCommand(OnShowInfoCommandExecuted, CanShowInfoCommandExecute);
