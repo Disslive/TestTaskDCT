@@ -7,12 +7,13 @@ using TestTaskDCT.Services;
 using TestTaskDCT.ViewModels.Base;
 using TestTaskDCT.Infrastructure;
 using System.Text.RegularExpressions;
+using System;
 
 namespace TestTaskDCT.ViewModels
 {
     class MainWindowViewModel : ViewModelBase
     {
-        #region variables
+        #region Variables
 
         Requests requests = new Requests();
         Calculations calculations = new Calculations();
@@ -57,9 +58,16 @@ namespace TestTaskDCT.ViewModels
             get => _ConvertAmount;
             set => Set(ref _ConvertAmount, value);
         }
+        private Asset _PlotCurrency = null;
+        public Asset PlotCurrency
+        {
+            get => _PlotCurrency;
+            set => Set(ref _PlotCurrency, value);
+        }
 
         public ObservableCollection<Asset> BestAssets { get; } 
         public ObservableCollection<Asset> Currencies { get; }
+        public ObservableCollection<DatePoints> Points { get; private set; } = null;
         #endregion
         #region Commands
 
@@ -91,11 +99,33 @@ namespace TestTaskDCT.ViewModels
         {
             Application.Current.Shutdown();
         }
-
+        public ICommand DrawChartCommand { get; }
+        private bool CanDrawChartCommandExecute(object p)
+        {
+            if (PlotCurrency != null)
+            {
+                return true;
+            }
+            return false;
+        }
+        private void OnDrawChartCommandExecuted(object p)
+        {
+            ObservableCollection<GraphPoint> unixPoints  = requests.GetPoints(PlotCurrency.Id, "d1");
+            Points = new ObservableCollection<DatePoints>();
+            foreach(var up in unixPoints)
+            {
+                DateTime start = new DateTime(1970, 1, 1,0,0,0,DateTimeKind.Utc);
+                DateTime date = start.AddMilliseconds(up.Time).ToLocalTime();
+                
+                Points.Add( new DatePoints { PriceUSD = up.PriceUSD, Date = date});
+            }
+            OnPropertyChanged("Points");
+        }
 
         #endregion
         public MainWindowViewModel()
         {
+            DrawChartCommand = new LambdaCommand(OnDrawChartCommandExecuted, CanDrawChartCommandExecute);
             ConvertCurrencyCommand = new LambdaCommand(OnConvertCurrencyCommandExecuted, CanConvertCurrencyCommandExecute);
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
        

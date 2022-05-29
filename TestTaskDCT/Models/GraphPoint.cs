@@ -3,6 +3,6 @@
     public class GraphPoint
     {
         public double PriceUSD { get; set; }
-        public int Time { get; set; }
+        public long Time { get; set; }
     }
 }

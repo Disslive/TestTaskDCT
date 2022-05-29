@@ -38,6 +38,12 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="OxyPlot, Version=2.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.Core.2.0.0\lib\net45\OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Wpf, Version=2.0.0.0, Culture=neutral, PublicKeyToken=75e952ba404cdbb0, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.Wpf.2.0.0\lib\net45\OxyPlot.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="ReachFramework" />
     <Reference Include="RestSharp, Version=106.2.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.106.2.0\lib\net452\RestSharp.dll</HintPath>
@@ -78,6 +84,7 @@
     <Compile Include="Infrastructure\Base\Command.cs" />
     <Compile Include="Infrastructure\LambdaCommand.cs" />
     <Compile Include="Models\Asset.cs" />
+    <Compile Include="Models\DatePoints.cs" />
     <Compile Include="Models\GraphPoint.cs" />
     <Compile Include="Models\Market.cs" />
     <Compile Include="Models\RequestParameter.cs" />

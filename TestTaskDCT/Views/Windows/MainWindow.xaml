@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm ="clr-namespace:TestTaskDCT.ViewModels" 
         xmlns:local="clr-namespace:TestTaskDCT"
+        xmlns:oxy="clr-namespace:OxyPlot.Wpf;assembly=OxyPlot.Wpf" 
         mc:Ignorable="d"
         Title="{Binding Title}" Height="450" Width="800">
     <Window.DataContext>
@@ -46,7 +47,7 @@
                         <ColumnDefinition Width="191*"/>
                         <ColumnDefinition Width="573*"/>
                     </Grid.ColumnDefinitions>
-                    <ComboBox VerticalAlignment="Center" Width="200" Height="30" Margin="10,10,3,333" Grid.ColumnSpan="2" ItemsSource="{Binding Path=Currencies}" DisplayMemberPath="Name" />
+                    <ComboBox VerticalAlignment="Center" Width="200" Height="30" Margin="10,10,3,333" Grid.ColumnSpan="2" ItemsSource="{Binding Path=Currencies}" DisplayMemberPath="Name" IsTextSearchEnabled="True"/>
                     <DataGrid ItemsSource="{Binding BestAssets}"
                           AutoGenerateColumns="False"
                           IsReadOnly="True" Grid.ColumnSpan="3" Margin="0,45,0,0"
@@ -55,10 +56,21 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
-            <TabItem Header="Graphs">
+            <TabItem Header="Charts">
                 <Grid>
-                    <ComboBox VerticalAlignment="Center" Width="200" Height="30" Margin="10,10,576,333" ItemsSource="{Binding Path=Currencies}" DisplayMemberPath="Name"/>
-
+                    <ComboBox VerticalAlignment="Center" Width="200" Height="30" Margin="10,10,576,333" ItemsSource="{Binding Path = Currencies}" DisplayMemberPath="Name" SelectedItem="{Binding PlotCurrency}" IsTextSearchEnabled="True">
+                    </ComboBox>
+                    <Button Width="200" Margin="245,10,341,333" Height="30" Content="Plot" Command="{Binding DrawChartCommand}"></Button>
+                    <oxy:Plot Margin="0,45,0,0">
+                        <oxy:Plot.Axes>
+                            <oxy:LinearAxis Position="Left"></oxy:LinearAxis>
+                            <oxy:DateTimeAxis  IntervalType="Days" MinorIntervalType="Days" Position="Bottom"></oxy:DateTimeAxis>
+                        </oxy:Plot.Axes>
+                        <oxy:LineSeries Color="Red"
+                                        ItemsSource="{Binding Points}"
+                                        DataFieldX="Date"
+                                        DataFieldY="PriceUSD"/>
+                    </oxy:Plot>
                 </Grid>
             </TabItem>
             <TabItem Header="Converter">
@@ -70,12 +82,13 @@
                     <TextBlock Height="30" Width="200" Margin="256,58,169,285" Grid.Column="1" Text="{Binding ConvertedCurrency}"></TextBlock>
                     <TextBlock Height="30" Width="200" Margin="100,152,486,191" Text="You Sell" TextAlignment="Center" Grid.ColumnSpan="2"></TextBlock>
                     <TextBox Width="200" Height="30" Margin="100,58,486,285" Grid.ColumnSpan="2" PreviewTextInput="NumberValidationTextBox" Text="{Binding ConvertAmount}"></TextBox>
-                    <ComboBox VerticalAlignment="Center" Width="200" Height="30" Margin="100,112,486,231" Grid.ColumnSpan="2" ItemsSource="{Binding Path=Currencies}" DisplayMemberPath="Name" SelectedItem="{Binding ToConvert}"></ComboBox>
-                    <ComboBox VerticalAlignment="Center" Width="200" Height="30" Margin="256,112,169,231" Grid.Column="1" ItemsSource="{Binding Path=Currencies}" DisplayMemberPath="Name" SelectedItem="{Binding ConvertInto}"></ComboBox>
+                    <ComboBox VerticalAlignment="Center" Width="200" Height="30" Margin="100,112,486,231" Grid.ColumnSpan="2" ItemsSource="{Binding Path=Currencies}" DisplayMemberPath="Name" SelectedItem="{Binding ToConvert}" IsTextSearchEnabled="True"></ComboBox>
+                    <ComboBox VerticalAlignment="Center" Width="200" Height="30" Margin="256,112,169,231" Grid.Column="1" ItemsSource="{Binding Path=Currencies}" DisplayMemberPath="Name" SelectedItem="{Binding ConvertInto}" IsTextSearchEnabled="True"></ComboBox>
                     <TextBlock Height="30" Width="200" Margin="256,152,169,191" Text="You Get" TextAlignment="Center" Grid.Column="1"/>
                     <Button Width="200" Height="30" Margin="108,187,317,156" Content="Convert" Grid.Column="1" Command="{Binding ConvertCurrencyCommand}"></Button>
                 </Grid>
             </TabItem>
+            <CheckBox Content="CheckBox" Height="100" Width="100"/>
         </TabControl>
     </DockPanel>
 </Window>
