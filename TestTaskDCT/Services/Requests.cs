@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using RestSharp;
-using System.Collections.Generic;
-using TestTaskDCT.Models;
-using System.Collections.ObjectModel;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using TestTaskDCT.Models;
 
 namespace TestTaskDCT.Services
 {

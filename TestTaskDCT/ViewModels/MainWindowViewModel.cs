@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 using System.Windows;
+using System.Windows.Input;
+using TestTaskDCT.Infrastructure;
 using TestTaskDCT.Models;
 using TestTaskDCT.Services;
 using TestTaskDCT.ViewModels.Base;
-using TestTaskDCT.Infrastructure;
-using System.Text.RegularExpressions;
-using System;
 
 namespace TestTaskDCT.ViewModels
 {
