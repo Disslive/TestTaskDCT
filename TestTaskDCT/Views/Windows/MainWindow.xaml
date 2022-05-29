@@ -14,7 +14,8 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
-                <MenuItem Header="Exit" Command="{Binding  CloseApplicationCommand}"></MenuItem>
+                <MenuItem Header="Exit" 
+                          Command="{Binding  CloseApplicationCommand}"></MenuItem>
             </MenuItem>
             <MenuItem Header="Theme">
                 <MenuItem Header="{Binding Theme}"></MenuItem>
@@ -47,26 +48,61 @@
                         <ColumnDefinition Width="191*"/>
                         <ColumnDefinition Width="573*"/>
                     </Grid.ColumnDefinitions>
-                    <ComboBox VerticalAlignment="Center" Width="200" Height="30" Margin="10,10,3,333" Grid.ColumnSpan="2" ItemsSource="{Binding Path=Currencies}" DisplayMemberPath="Name" IsTextSearchEnabled="True"/>
-                    <DataGrid ItemsSource="{Binding BestAssets}"
-                          AutoGenerateColumns="False"
-                          IsReadOnly="True" Grid.ColumnSpan="3" Margin="0,45,0,0"
-                          >
+                    <ComboBox VerticalAlignment="Center" Width="200" 
+                              Height="30" Margin="10,10,3,333" 
+                              Grid.ColumnSpan="2" 
+                              ItemsSource="{Binding Currencies}" 
+                              DisplayMemberPath="Name" 
+                              SelectedItem="{Binding Details}" 
+                              IsTextSearchEnabled="True"
+                              />
+                    <Button Width="200"  Margin="31,10,342,333" Height="30" Grid.Column="2" Content="Show" Command="{Binding ShowInfoCommand}"></Button>
+                    <DataGrid AutoGenerateColumns="False"
+                              IsReadOnly="True"
+                              Grid.ColumnSpan="3" 
+                              Margin="0,45,0,264"
+                              ItemsSource="{Binding Info}">
 
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Rank" Binding="{Binding Rank}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Symbol" Binding="{Binding Symbol}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Price (USD)" Binding="{Binding PriceUsd}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Market Cap (USD)" Binding="{Binding MarketCapUsd}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Supply" Binding="{Binding Supply}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Change(Percent) " Binding="{Binding ChangePercent24Hr}" Width="*"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DataGrid AutoGenerateColumns="False"
+                              IsReadOnly="True"
+                              Grid.ColumnSpan="3" Margin="0,114,0,0"
+                              ItemsSource="{Binding Markets}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Market Name" Binding="{Binding ExchangeId}" Width="*" TextSearch.Text="ExchangeId"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Price" Binding="{Binding PriceUSD}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Volume Percent" Binding="{Binding VolumePercent}" Width="*"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                        
                     </DataGrid>
                 </Grid>
             </TabItem>
             <TabItem Header="Charts">
                 <Grid>
-                    <ComboBox VerticalAlignment="Center" Width="200" Height="30" Margin="10,10,576,333" ItemsSource="{Binding Path = Currencies}" DisplayMemberPath="Name" SelectedItem="{Binding PlotCurrency}" IsTextSearchEnabled="True">
+                    <ComboBox VerticalAlignment="Center" 
+                              Width="200" Height="30" 
+                              Margin="10,10,576,333" 
+                              ItemsSource="{Binding Path = Currencies}" 
+                              DisplayMemberPath="Name" 
+                              SelectedItem="{Binding PlotCurrency}" 
+                              IsTextSearchEnabled="True">
                     </ComboBox>
                     <Button Width="200" Margin="245,10,341,333" Height="30" Content="Plot" Command="{Binding DrawChartCommand}"></Button>
-                    <oxy:Plot Margin="0,45,0,0">
-                        <oxy:Plot.Axes>
-                            <oxy:LinearAxis Position="Left"></oxy:LinearAxis>
-                            <oxy:DateTimeAxis  IntervalType="Days" MinorIntervalType="Days" Position="Bottom"></oxy:DateTimeAxis>
+                    <oxy:Plot Margin="0,45,0,0" >
+                        <oxy:Plot.Axes >
+                            <oxy:LinearAxis Position="Left" IsZoomEnabled="False"></oxy:LinearAxis>
+                            <oxy:DateTimeAxis  IntervalType="Days" MinorIntervalType="Days" Position="Bottom" IsZoomEnabled="False"></oxy:DateTimeAxis>
                         </oxy:Plot.Axes>
-                        <oxy:LineSeries Color="Red"
+                        <oxy:LineSeries  Color="Red"
                                         ItemsSource="{Binding Points}"
                                         DataFieldX="Date"
                                         DataFieldY="PriceUSD"/>
@@ -82,13 +118,26 @@
                     <TextBlock Height="30" Width="200" Margin="256,58,169,285" Grid.Column="1" Text="{Binding ConvertedCurrency}"></TextBlock>
                     <TextBlock Height="30" Width="200" Margin="100,152,486,191" Text="You Sell" TextAlignment="Center" Grid.ColumnSpan="2"></TextBlock>
                     <TextBox Width="200" Height="30" Margin="100,58,486,285" Grid.ColumnSpan="2" PreviewTextInput="NumberValidationTextBox" Text="{Binding ConvertAmount}"></TextBox>
-                    <ComboBox VerticalAlignment="Center" Width="200" Height="30" Margin="100,112,486,231" Grid.ColumnSpan="2" ItemsSource="{Binding Path=Currencies}" DisplayMemberPath="Name" SelectedItem="{Binding ToConvert}" IsTextSearchEnabled="True"></ComboBox>
-                    <ComboBox VerticalAlignment="Center" Width="200" Height="30" Margin="256,112,169,231" Grid.Column="1" ItemsSource="{Binding Path=Currencies}" DisplayMemberPath="Name" SelectedItem="{Binding ConvertInto}" IsTextSearchEnabled="True"></ComboBox>
+                    <ComboBox VerticalAlignment="Center" 
+                              Width="200" Height="30"
+                              Margin="100,112,486,231" 
+                              Grid.ColumnSpan="2" 
+                              ItemsSource="{Binding Path=Currencies}" 
+                              DisplayMemberPath="Name" 
+                              SelectedItem="{Binding ToConvert}" 
+                              IsTextSearchEnabled="True"></ComboBox>
+                    <ComboBox VerticalAlignment="Center" 
+                              Width="200" Height="30" 
+                              Margin="256,112,169,231" 
+                              Grid.Column="1" 
+                              ItemsSource="{Binding Path=Currencies}" 
+                              DisplayMemberPath="Name" 
+                              SelectedItem="{Binding ConvertInto}" 
+                              IsTextSearchEnabled="True"></ComboBox>
                     <TextBlock Height="30" Width="200" Margin="256,152,169,191" Text="You Get" TextAlignment="Center" Grid.Column="1"/>
                     <Button Width="200" Height="30" Margin="108,187,317,156" Content="Convert" Grid.Column="1" Command="{Binding ConvertCurrencyCommand}"></Button>
                 </Grid>
             </TabItem>
-            <CheckBox Content="CheckBox" Height="100" Width="100"/>
         </TabControl>
     </DockPanel>
 </Window>

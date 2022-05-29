@@ -64,8 +64,40 @@ namespace TestTaskDCT.ViewModels
             get => _PlotCurrency;
             set => Set(ref _PlotCurrency, value);
         }
+        private Asset _Details = null;
+        public Asset Details
+        {
+            get => _Details;
+            set
+            {
+                _Details = value;
+                OnPropertyChanged(nameof(Details));
+            }
+        }
 
-        public ObservableCollection<Asset> BestAssets { get; } 
+        private ObservableCollection<Asset> _Info;
+        public ObservableCollection<Asset> Info
+        {
+            get => _Info;
+            set
+            {
+                _Info = value;
+                OnPropertyChanged(nameof(Info));
+            }
+        }
+
+        private ObservableCollection<Market> _Markets;
+        public ObservableCollection<Market> Markets
+        {
+            get => _Markets;
+            set
+            {
+                _Markets = value;
+                OnPropertyChanged(nameof(Markets));
+            }
+        }
+
+        public ObservableCollection<Asset> BestAssets { get; }
         public ObservableCollection<Asset> Currencies { get; }
         public ObservableCollection<DatePoints> Points { get; private set; } = null;
         #endregion
@@ -92,7 +124,6 @@ namespace TestTaskDCT.ViewModels
             }
         }
 
-
         public ICommand CloseApplicationCommand { get; }
         private bool CanCloseApplicationCommandExecute(object p) => true;
         private void OnCloseApplicationCommandExecuted(object p)
@@ -108,6 +139,7 @@ namespace TestTaskDCT.ViewModels
             }
             return false;
         }
+    
         private void OnDrawChartCommandExecuted(object p)
         {
             ObservableCollection<GraphPoint> unixPoints  = requests.GetPoints(PlotCurrency.Id, "d1");
@@ -121,10 +153,36 @@ namespace TestTaskDCT.ViewModels
             }
             OnPropertyChanged("Points");
         }
+        public ICommand ShowInfoCommand { get; }
+        private bool CanShowInfoCommandExecute(object p)
+        {
+            if (Details != null)
+            {
+                return true;
+            }
+            return false;
+        }
+        private void OnShowInfoCommandExecuted(object p)
+        {
+            Info = new ObservableCollection<Asset>()
+            {
+                Details
+            };
+            List<RequestParameter> parametersAllMarkets = new List<RequestParameter>()
+            {
+                new RequestParameter
+                {
+                    Name = "limit",
+                    Value = 2000
+                }
+            };
+            Markets = requests.GetMarketsData(Details.Id, parametersAllMarkets);
 
+        }
         #endregion
         public MainWindowViewModel()
         {
+            ShowInfoCommand = new LambdaCommand(OnShowInfoCommandExecuted, CanShowInfoCommandExecute);
             DrawChartCommand = new LambdaCommand(OnDrawChartCommandExecuted, CanDrawChartCommandExecute);
             ConvertCurrencyCommand = new LambdaCommand(OnConvertCurrencyCommandExecuted, CanConvertCurrencyCommandExecute);
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
@@ -143,6 +201,8 @@ namespace TestTaskDCT.ViewModels
             {
                 BestAssets.Add(Currencies[i]);
             }
+
+            
         }
 
 
