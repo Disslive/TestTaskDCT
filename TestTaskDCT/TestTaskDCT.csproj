@@ -89,6 +89,16 @@
     <Compile Include="Models\Market.cs" />
     <Compile Include="Models\RequestParameter.cs" />
     <Compile Include="Models\Rate.cs" />
+    <Compile Include="Properties\Lang\EN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Lang\UA.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UA.resx</DependentUpon>
+    </Compile>
     <Compile Include="Services\Calculations.cs" />
     <Compile Include="Services\Requests.cs" />
     <Compile Include="ViewModels\Base\ViewModelBase.cs" />
@@ -112,6 +122,14 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Properties\Lang\EN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EN.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Lang\UA.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UA.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
