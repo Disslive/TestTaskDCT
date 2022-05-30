@@ -1,0 +1,207 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:oxy="clr-namespace:OxyPlot.Wpf;assembly=OxyPlot.Wpf">
+
+    <sys:Double x:Key="DataGridRow.Height">33</sys:Double>
+
+
+    <SolidColorBrush x:Key="DataGrid.BorderBrush" Color="#E9ECF1" />
+    <SolidColorBrush x:Key="ComboBox.Background" Color="#D2D7FF" />
+    <SolidColorBrush x:Key="ComboBox.Inactive.Background" Color="#CDCFE2" />
+    <SolidColorBrush x:Key="ColumnHeader.Background" Color="#E9FEFF" />
+
+    <SolidColorBrush x:Key="ColumnHeader.BorderBrush" Color="#E9ECF1" />
+
+    <SolidColorBrush x:Key="DataGridRow.BorderBrush" Color="#E9ECF1" />
+
+    <SolidColorBrush x:Key="DataGridRow.Normal.Background" Color="#FFFFFF" />
+
+    <SolidColorBrush x:Key="DataGridRow.Normal.Foreground" Color="#000000" />
+
+    <SolidColorBrush x:Key="DataGridRow.MouseOver.Background" Color="#F6F7FB" />
+
+    <SolidColorBrush x:Key="DataGridRow.MouseOver.Foreground" Color="#000000" />
+
+    <SolidColorBrush x:Key="DataGridRow.Selected.Background" Color="#F6F7FB" />
+
+    <SolidColorBrush x:Key="DataGridRow.Selected.Foreground" Color="#000000" />
+    <Style TargetType="DockPanel">
+        <Setter Property="Background" Value="{StaticResource ColumnHeader.Background}"/>
+    </Style>
+    <Style TargetType="oxy:Plot">
+        <Setter Property="Background" Value="{StaticResource ColumnHeader.Background}"/>
+        <Setter Property="TextColor" Value="#000000"/>
+    </Style>
+    <Style TargetType="oxy:LineSeries">
+        <Setter Property="Color" Value="Red"/>
+    </Style>
+  
+        <Style TargetType="DataGrid">
+        
+        <Setter Property="RowHeaderWidth" Value="0" />
+        <Setter Property="HeadersVisibility" Value="Column" />
+        <Setter Property="Background" Value="{StaticResource ColumnHeader.Background}" />
+        <Setter Property="BorderBrush" Value="{StaticResource DataGrid.BorderBrush}" />
+        <Setter Property="HorizontalGridLinesBrush" Value="#00E9ECF1" />
+        <Setter Property="VerticalGridLinesBrush" Value="#00E9ECF1" />
+        <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="AutoGenerateColumns" Value="False" />
+        <Setter Property="CanUserAddRows" Value="False" />
+        <Setter Property="CanUserResizeColumns" Value="False" />
+        <Setter Property="CanUserResizeRows" Value="False" />
+        <Setter Property="GridLinesVisibility" Value="None" />
+        <Setter Property="IsReadOnly" Value="True" />
+        <Setter Property="RowHeight" Value="{StaticResource DataGridRow.Height}" />
+        <Setter Property="SelectionMode" Value="Single" />
+    </Style>
+
+    <Style TargetType="DataGridColumnHeader">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Foreground" Value="#000000" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Height" Value="28" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DataGridColumnHeader">
+                    <Border x:Name="BackgroundBorder" Width="Auto" Margin="-1,0"
+                            BorderBrush="{StaticResource ColumnHeader.BorderBrush}"
+                            SnapsToDevicePixels="True" UseLayoutRounding="True">
+                        <ContentPresenter Margin="5,0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type DataGridRow}">
+        <Setter Property="Background" Value="{StaticResource DataGridRow.Normal.Background}" />
+        <Setter Property="Foreground" Value="{StaticResource DataGridRow.MouseOver.Foreground}" />
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
+        <Setter Property="BorderBrush" Value="{StaticResource DataGridRow.BorderBrush}" />
+        <Setter Property="ValidationErrorTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <TextBlock Margin="0,0,0,0" VerticalAlignment="Center" Foreground="Red" Text="!" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridRow}">
+                    <Border x:Name="DGR_Border" Margin="0,0,0,-1"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            SnapsToDevicePixels="True" UseLayoutRounding="True">
+                        <SelectiveScrollingGrid>
+                            <SelectiveScrollingGrid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </SelectiveScrollingGrid.ColumnDefinitions>
+                            <SelectiveScrollingGrid.RowDefinitions>
+                                <RowDefinition Height="*" MinHeight="{StaticResource DataGridRow.Height}" />
+                                <RowDefinition Height="Auto" />
+                            </SelectiveScrollingGrid.RowDefinitions>
+                            <DataGridCellsPresenter Grid.Column="1"
+                                                    ItemsPanel="{TemplateBinding ItemsPanel}"
+                                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            <DataGridDetailsPresenter Grid.Row="1" Grid.Column="1"
+                                                      SelectiveScrollingGrid.SelectiveScrollingOrientation="{Binding AreRowDetailsFrozen,
+                                                                                                                     ConverterParameter={x:Static SelectiveScrollingOrientation.Vertical},
+                                                                                                                     Converter={x:Static DataGrid.RowDetailsScrollingConverter},
+                                                                                                                     RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                      Visibility="{TemplateBinding DetailsVisibility}" />
+                            <DataGridRowHeader Grid.RowSpan="2" SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical"
+                                               Visibility="{Binding HeadersVisibility,
+                                                                    ConverterParameter={x:Static DataGridHeadersVisibility.Row},
+                                                                    Converter={x:Static DataGrid.HeadersVisibilityConverter},
+                                                                    RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                        </SelectiveScrollingGrid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="{StaticResource DataGridRow.MouseOver.Foreground}" />
+                            <Setter Property="Background" Value="{StaticResource DataGridRow.MouseOver.Background}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Foreground" Value="{StaticResource DataGridRow.Selected.Foreground}" />
+                            <Setter Property="Background" Value="{StaticResource DataGridRow.Selected.Background}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="DataGridCell">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DataGridCell">
+                    <Border x:Name="Bg" Background="Transparent" UseLayoutRounding="True">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Foreground" Value="#000000" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="TabItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabItem">
+                    <Border Name="Border" BorderThickness="1,1,1,0" BorderBrush="{StaticResource DataGrid.BorderBrush}" CornerRadius="4,4,0,0" Margin="2,0">
+                        <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="8,2"/>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource ComboBox.Background}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="False">
+                            <Setter TargetName="Border" Property="Background" Value="White" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="Grid">
+        <Setter Property="Background" Value="{StaticResource ColumnHeader.Background}"></Setter>
+    </Style>
+    <Style TargetType="ComboBox">
+        <Setter Property="IsEditable" Value="False"/>
+        <Setter Property="IsReadOnly" Value="False"/>
+
+    </Style>
+    <Style TargetType="Button">
+
+        <Setter Property="Background" Value="{StaticResource ComboBox.Background}"></Setter>
+    </Style>
+    <Style TargetType="TextBlock">
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="{StaticResource ComboBox.Inactive.Background}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="MenuItem">
+        <Setter Property="Background" Value="{StaticResource ColumnHeader.Background}"></Setter>
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
+    <Style TargetType="Menu">
+        <Setter Property="Background" Value="{StaticResource ColumnHeader.Background}"/>
+    </Style>
+</ResourceDictionary>
